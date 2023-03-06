@@ -66,22 +66,30 @@ img {vertical-align: middle;}
   .text {font-size: 11px}
 }
 </style>
-<script src="images/getimages.php"></script>
+
 
 <script type="text/javascript">
-var curimg=0
-function rotateimages(){
-document.getElementById("slideshow").setAttribute("src", "images/"+galleryarray[curimg])
-curimg=(curimg<galleryarray.length-1)? curimg+1 : 0
+// get all images from the images folder
+var imagesFolder = 'images/';
+var images = [];
+for (let file of fs.readdirSync(imagesFolder)) {
+  images.push(imagesFolder + file);
 }
 
-window.onload=function(){
-setInterval("rotateimages()", 2500)
+// create a slideshow with those images
+var slideshow = document.createElement('div');
+slideshow.id = 'slideshow';
+document.body.appendChild(slideshow);
+
+for (let image of images) {
+  var img = document.createElement('img');
+  img.src = image;
+  slideshow.appendChild(img);
 }
 </script>
 </head>
 <body>
-  <img id="slideshow" style="width:100%" src="images/aulas.jpg" />
+ 
   
 
 
