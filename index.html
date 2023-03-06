@@ -72,23 +72,38 @@ img {vertical-align: middle;}
 </head>
 <body>
  <script type="text/javascript">
-// get all images from the images folder
-var imagesFolder = 'images/';
+// Get the container element
+var container = document.getElementById("container");
+
+// Get the images folder
+var imagesFolder = "./images/";
+
+// Get the images from the folder
 var images = [];
-for (let file of fs.readdirSync(imagesFolder)) {
-  images.push(imagesFolder + file);
+fetch(imagesFolder)
+    .then(res => res.json())
+    .then(data => {
+        images = data.files;
+        // Create the image elements
+        images.forEach(image => {
+            var img = document.createElement("img");
+            img.src = imagesFolder + image;
+            container.appendChild(img);
+        });
+    });
+
+// Add a function to cycle through the images
+var i = 0;
+function cycleImages(){
+    if(i > images.length - 1){
+        i = 0;
+    }
+    container.querySelectorAll("img").forEach(img => img.style.display = "none");
+    container.querySelectorAll("img")[i].style.display = "block";
+    i++;
 }
 
-// create a slideshow with those images
-var slideshow = document.createElement('div');
-slideshow.id = 'slideshow';
-document.body.appendChild(slideshow);
-
-for (let image of images) {
-  var img = document.createElement('img');
-  img.src = image;
-  slideshow.appendChild(img);
-}
+setInterval(cycleImages, 3000);
 </script>
   
 
