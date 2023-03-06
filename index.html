@@ -67,16 +67,17 @@ img {vertical-align: middle;}
 }
 </style>
 <script src="images/getimages.php"></script>
-  
+
 <script type="text/javascript">
+
 var curimg=0
 function rotateimages(){
-    document.getElementById("slideshow").setAttribute("src", "images/"+galleryarray[curimg])
-    curimg=(curimg<galleryarray.length-1)? curimg+1 : 0
+document.getElementById("slideshow").setAttribute("src", "images/"+galleryarray[curimg])
+curimg=(curimg<galleryarray.length-1)? curimg+1 : 0
 }
- 
+
 window.onload=function(){
-    setInterval("rotateimages()", 200)
+setInterval("rotateimages()", 2500)
 }
 </script>
 </head>
